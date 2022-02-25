@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version '2.9.6'
+}
+
+group 'API-tests'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+ext {
+    allureVersion = '2.17.3'
+    restassuredVersion = '4.5.1'
+    junitVersion = '5.8.2'
+    jacksonVersion = '2.13.1'
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+javadoc.options.encoding = 'UTF-8'
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+allure {
+    autoconfigure = true
+    version = allureVersion
+
+    useJUnit5 {
+        version = allureVersion
+    }
+}
+
+dependencies {
+    testImplementation("com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}")
+    testImplementation("com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}")
+    testImplementation("io.rest-assured:rest-assured:${restassuredVersion}")
+    testImplementation(platform("org.junit:junit-bom:${junitVersion}"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("io.qameta.allure:allure-junit5:${allureVersion}")
+    testRuntimeOnly('org.slf4j:slf4j-simple:1.7.32')
+
+}
+
+test {
+    useJUnitPlatform()
+}
