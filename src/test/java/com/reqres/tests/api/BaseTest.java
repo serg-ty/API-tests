@@ -6,9 +6,10 @@ import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
 
-public class BaseTest {
+abstract class BaseTest {
 
     protected final RequestSpecification requestSpec = given()
             .baseUri(Config.getProperty("base.uri"))
+            .contentType(ContentType.JSON)
             .accept(ContentType.JSON);
 }
